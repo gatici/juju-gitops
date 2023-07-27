@@ -3,12 +3,6 @@
 
 terraform {
 
-  cloud {
-    workspaces {
-      name = "learn-terraform-eks"
-    }
-  }
-
   backend "s3" {
     bucket = "tfstate-gruyaume"
     region = "us-east-2"
@@ -24,16 +18,6 @@ terraform {
     random = {
       source  = "hashicorp/random"
       version = "~> 3.5.1"
-    }
-
-    tls = {
-      source  = "hashicorp/tls"
-      version = "~> 4.0.4"
-    }
-
-    cloudinit = {
-      source  = "hashicorp/cloudinit"
-      version = "~> 2.3.2"
     }
   }
 
