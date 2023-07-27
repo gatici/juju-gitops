@@ -1,4 +1,8 @@
 
+module "kubernetes" {
+  source = "./kubernetes"
+}
+
 terraform {
   required_providers {
     aws = {
