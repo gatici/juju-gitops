@@ -13,17 +13,23 @@ jobs:
       - uses: hashicorp/setup-terraform@v2
         with:
           terraform_wrapper: false
-      - run: cd terraform && terraform init
+      - run: |
+          cd terraform
+          terraform init
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - id: plan
-        run: cd terraform && terraform plan -no-color
+        run: |
+          cd terraform
+          terraform plan -no-color
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - id: apply
-        run: cd terraform && terraform apply --auto-approve -no-color
+        run: |
+          cd terraform
+          terraform apply --auto-approve -no-color
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -32,3 +38,6 @@ jobs:
           cd terraform
           output=$(terraform output cluster_endpoint)
           echo $output
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
