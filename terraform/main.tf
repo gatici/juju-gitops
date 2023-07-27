@@ -1,5 +1,5 @@
-#
-#module "cos_eks" {
-#  source = "./cos-eks"
-#  region = "us-east-2"
-#}
+
+module "EKS" {
+  source = "./eks"
+  region = "us-east-2"
+}
