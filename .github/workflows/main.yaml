@@ -39,7 +39,7 @@ jobs:
       - name: Call terraform output
         run: |
           cd terraform
-          output=$(terraform output cluster_endpoint)
+          output=$(terraform output cluster_name)
           echo $output
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
