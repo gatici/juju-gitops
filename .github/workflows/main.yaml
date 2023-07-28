@@ -5,6 +5,14 @@ on:
     branches:
       - main
 
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  JUJU_CA_CERT: ${{ secrets.JUJU_CA_CERT }}
+  JUJU_CONTROLLER_ADDRESSES: ${{ secrets.JUJU_CONTROLLER_ADDRESSES }}
+  JUJU_PASSWORD: ${{ secrets.JUJU_PASSWORD }}
+  JUJU_USERNAME: ${{ secrets.JUJU_USERNAME }}
+
 jobs:
   terraform-plan:
     runs-on: ubuntu-22.04
@@ -17,30 +25,18 @@ jobs:
         run: |
           cd terraform
           terraform init
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - id: plan
         name: Terraform plan
         run: |
           cd terraform
           terraform plan -no-color
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - id: apply
         name: Terraform apply
         run: |
           cd terraform
           terraform apply --auto-approve -no-color
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Call terraform output
         run: |
           cd terraform
           output=$(terraform output cos_cluster_name)
           echo $output
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
