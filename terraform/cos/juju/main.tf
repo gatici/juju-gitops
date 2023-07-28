@@ -1,3 +1,4 @@
+provider "juju" {}
 
 resource "juju_model" "cos" {
   name = "cos"
