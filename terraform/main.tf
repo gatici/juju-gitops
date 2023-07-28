@@ -4,4 +4,3 @@ module "cos" {
   region = "us-east-2"
 }
 
-provider "juju" {}

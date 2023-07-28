@@ -7,5 +7,3 @@ module "EKS" {
 module "juju_cos" {
   source = "./juju"
 }
-
-provider "juju" {}
