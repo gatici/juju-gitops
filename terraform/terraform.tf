@@ -4,7 +4,7 @@
 terraform {
 
   backend "s3" {
-    bucket = "tfstate-gruyaume"
+    bucket = "tfstate-gitops-juju"
     region = "us-east-2"
     key    = "terraform.tfstate"
   }
