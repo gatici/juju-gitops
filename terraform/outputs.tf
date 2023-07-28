@@ -1,4 +1,4 @@
-output "cluster_name" {
-  description = "EKS cluster name"
-  value       = module.EKS.cluster_name
+output "cos_cluster_name" {
+  description = "COS Kubernetes cluster name"
+  value       = module.cos.cluster_name
 }
