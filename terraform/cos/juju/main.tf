@@ -71,7 +71,7 @@ resource "juju_integration" "grafana_source" {
   }
 }
 
-resource "juju_integration" "metrics" {
+resource "juju_integration" "grafana_metrics" {
   model = juju_model.cos.name
 
   application {
@@ -127,7 +127,16 @@ resource "juju_integration" "grafana_ingress" {
   }
 }
 
-#- [grafana:grafana-source, prometheus:grafana-source]
-#- [prometheus:metrics-endpoint, traefik:metrics-endpoint]
-#- [prometheus:metrics-endpoint, grafana:metrics-endpoint]
-#- [grafana:grafana-dashboard, prometheus:grafana-dashboard]
+resource "juju_integration" "traefik_metrics" {
+  model = juju_model.cos.name
+
+  application {
+    name     = juju_application.prometheus.name
+    endpoint = "metrics-endpoint"
+  }
+
+  application {
+    name     = juju_application.traefik.name
+    endpoint = "metrics-endpoint"
+  }
+}
