@@ -13,8 +13,8 @@ resource "juju_model" "cos" {
   name = "cos"
   cloud {
     name = "cos-eks"
-    credential = "cos-eks"
   }
+  credential = "cos-eks"
 }
 
 resource "juju_application" "grafana" {
