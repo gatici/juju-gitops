@@ -4,6 +4,6 @@ module "EKS" {
   region = var.region
 }
 
-module "juju_cos" {
-  source = "./juju"
-}
+#module "juju_cos" {
+#  source = "./juju"
+#}
