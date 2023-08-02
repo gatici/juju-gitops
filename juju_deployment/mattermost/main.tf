@@ -29,44 +29,44 @@ resource "juju_application" "mattermost" {
 
   units = 1
 }
-#
-# resource "juju_application" "postgresql" {
-#   name = "postgresql-k8s"
-#   model = juju_model.mattermost.name
-#   trust = true
-#
-#   charm {
-#     name = "postgresql-k8s"
-#     channel  = "14/beta"
-#   }
-#
-#   units = 1
-# }
-#
-# resource "juju_integration" "db" {
-#   model = juju_model.mattermost.name
-#
-#   application {
-#     name     = juju_application.mattermost.name
-#     endpoint = "db"
-#   }
-#
-#   application {
-#     name     = juju_application.postgresql.name
-#     endpoint = "db"
-#   }
-# }
+
+resource "juju_application" "postgresql" {
+  name = "postgresql-k8s"
+  model = juju_model.mattermost.name
+  trust = true
+
+  charm {
+    name = "postgresql-k8s"
+    channel  = "14/stable"
+  }
+
+  units = 1
+}
+
+resource "juju_integration" "db" {
+  model = juju_model.mattermost.name
+
+  application {
+    name     = juju_application.mattermost.name
+    endpoint = "db"
+  }
+
+  application {
+    name     = juju_application.postgresql.name
+    endpoint = "db"
+  }
+}
 
 
-# resource "juju_integration" "metrics" {
-#   model = juju_model.mattermost.name
-#
-#   application {
-#     name     = juju_application.postgresql.name
-#     endpoint = "metrics-endpoint"
-#   }
-#
-#   application {
-#     offer_url = var.metrics_offer_url
-#   }
-# }
+resource "juju_integration" "metrics" {
+  model = juju_model.mattermost.name
+
+  application {
+    name     = juju_application.postgresql.name
+    endpoint = "metrics-endpoint"
+  }
+
+  application {
+    offer_url = var.metrics_offer_url
+  }
+}
