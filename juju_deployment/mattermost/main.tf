@@ -58,15 +58,15 @@ resource "juju_integration" "db" {
 }
 
 
-resource "juju_integration" "metrics" {
-  model = juju_model.mattermost.name
-
-  application {
-    name     = juju_application.postgresql.name
-    endpoint = "metrics-endpoint"
-  }
-
-  application {
-    offer_url = var.metrics_offer_url
-  }
-}
+# resource "juju_integration" "metrics" {
+#   model = juju_model.mattermost.name
+#
+#   application {
+#     name     = juju_application.postgresql.name
+#     endpoint = "metrics-endpoint"
+#   }
+#
+#   application {
+#     offer_url = var.metrics_offer_url
+#   }
+# }
