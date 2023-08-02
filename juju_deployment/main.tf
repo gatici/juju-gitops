@@ -6,4 +6,5 @@ module "cos" {
 module "mattermost" {
   source = "./mattermost"
   cloud_name = "eks_2"
+  metrics_offer_url = module.cos.metrics_offer_url
 }

@@ -140,3 +140,9 @@ resource "juju_integration" "traefik_metrics" {
     endpoint = "metrics-endpoint"
   }
 }
+
+resource "juju_offer" "metrics" {
+  model            = juju_model.cos.name
+  application_name = juju_application.prometheus.name
+  endpoint         = "metrics-endpoint"
+}
