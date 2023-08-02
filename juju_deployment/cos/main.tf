@@ -13,9 +13,9 @@ terraform {
 resource "juju_model" "cos" {
   name = "cos"
   cloud {
-    name = "cos"
+    name = var.cloud_name
   }
-  credential = "cos"
+  credential = var.cloud_name
 }
 
 resource "juju_application" "grafana" {

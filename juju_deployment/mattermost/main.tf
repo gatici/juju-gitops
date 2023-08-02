@@ -13,9 +13,9 @@ terraform {
 resource "juju_model" "mattermost" {
   name = "mattermost"
   cloud {
-    name = "mattermost"
+    name = var.cloud_name
   }
-  credential = "mattermost"
+  credential = var.cloud_name
 }
 
 resource "juju_application" "mattermost" {

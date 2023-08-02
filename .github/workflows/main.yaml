@@ -14,7 +14,7 @@ env:
   JUJU_USERNAME: ${{ secrets.JUJU_USERNAME }}
 
 jobs:
-  terraform-plan:
+  infrastructure-apply:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
@@ -23,20 +23,36 @@ jobs:
           terraform_wrapper: false
       - name: Terraform init
         run: |
-          cd terraform
+          cd infrastructure
           terraform init
       - id: plan
         name: Terraform plan
         run: |
-          cd terraform
+          cd infrastructure
           terraform plan -no-color
       - id: apply
         name: Terraform apply
         run: |
-          cd terraform
+          cd infrastructure
           terraform apply --auto-approve -no-color
-      - name: Call terraform output
+  juju_deployment-apply:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_wrapper: false
+      - name: Terraform init
         run: |
-          cd terraform
-          output=$(terraform output cos_cluster_name)
-          echo $output
+          cd juju_deployment
+          terraform init
+      - id: plan
+        name: Terraform plan
+        run: |
+          cd juju_deployment
+          terraform plan -no-color
+      - id: apply
+        name: Terraform apply
+        run: |
+          cd juju_deployment
+          terraform apply --auto-approve -no-color

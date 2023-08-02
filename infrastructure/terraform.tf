@@ -1,7 +1,11 @@
-# Copyright (c) HashiCorp, Inc.
-# SPDX-License-Identifier: MPL-2.0
 
 terraform {
+
+  backend "s3" {
+    bucket = "tfdemo-infra"
+    region = "us-east-2"
+    key    = "terraform.tfstate"
+  }
 
   required_providers {
     aws = {
@@ -23,4 +27,5 @@ terraform {
     }
   }
 
+  required_version = "~> 1.3"
 }

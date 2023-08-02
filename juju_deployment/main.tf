@@ -1,10 +1,9 @@
-
 module "cos" {
   source = "./cos"
-  region = "us-east-2"
+  cloud_name = "eks_1"
 }
 
 module "mattermost" {
   source = "./mattermost"
-  region = "us-east-2"
+  cloud_name = "eks_2"
 }
