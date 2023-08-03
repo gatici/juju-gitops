@@ -6,5 +6,5 @@ module "cos" {
 module "sdcore" {
   source = "./sdcore"
   cloud_name = "eks_2"
-  metrics_offer_url = module.cos.metrics_offer_url
+  metrics_remote_write_offer_url = module.cos.metrics_remote_write_offer_url
 }

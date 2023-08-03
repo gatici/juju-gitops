@@ -4,7 +4,7 @@ variable "cloud_name" {
   type        = string
 }
 
-variable "metrics_offer_url" {
+variable "metrics_remote_write_offer_url" {
   description = "Metrics offer URL"
   type = string
 }

@@ -44,6 +44,19 @@ resource "juju_application" "prometheus" {
   units = 1
 }
 
+resource "juju_application" "loki" {
+  name = "loki"
+  model = juju_model.cos.name
+  trust = true
+
+  charm {
+    name = "loki-k8s"
+    channel  = "latest/stable"
+  }
+
+  units = 1
+}
+
 resource "juju_application" "traefik" {
   name = "traefik"
   model = juju_model.cos.name
@@ -141,8 +154,42 @@ resource "juju_integration" "traefik_metrics" {
   }
 }
 
-resource "juju_offer" "metrics" {
+resource "juju_integration" "loki_metrics" {
+  model = juju_model.cos.name
+
+  application {
+    name     = juju_application.loki.name
+    endpoint = "metrics-endpoint"
+  }
+
+  application {
+    name     = juju_application.prometheus.name
+    endpoint = "metrics-endpoint"
+  }
+}
+
+resource "juju_integration" "loki_dashboard" {
+  model = juju_model.cos.name
+
+  application {
+    name     = juju_application.loki.name
+    endpoint = "grafana-dashboard"
+  }
+
+  application {
+    name     = juju_application.grafana.name
+    endpoint = "grafana-dashboard"
+  }
+}
+
+resource "juju_offer" "metrics_remote_write" {
   model            = juju_model.cos.name
   application_name = juju_application.prometheus.name
-  endpoint         = "metrics-endpoint"
+  endpoint         = "receive-remote-write"
+}
+
+resource "juju_offer" "logging" {
+  model            = juju_model.cos.name
+  application_name = juju_application.loki.name
+  endpoint         = "logging"
 }

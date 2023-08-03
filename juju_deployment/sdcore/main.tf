@@ -394,18 +394,3 @@ resource "juju_integration" "mongodb_logging" {
     endpoint = "logging-provider"
   }
 }
-
-#
-# resource "juju_application" "upf" {
-#   name = "upf"
-#   model = juju_model.sdcore.name
-#   trust = true
-#
-#   charm {
-#     name = "sdcore-upf"
-#     channel  = "edge"
-#     series = "jammy"
-#   }
-#
-#   units = 1
-# }
