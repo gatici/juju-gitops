@@ -155,7 +155,7 @@ resource "juju_integration" "ausf_nrf" {
 
   application {
     name     = juju_application.nrf.name
-    endpoint = "fiveg_nrf"
+    endpoint = "fiveg-nrf"
   }
 }
 
@@ -169,7 +169,7 @@ resource "juju_integration" "amf_nrf" {
 
   application {
     name     = juju_application.nrf.name
-    endpoint = "fiveg_nrf"
+    endpoint = "fiveg-nrf"
   }
 }
 
