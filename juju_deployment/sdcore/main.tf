@@ -144,6 +144,19 @@ resource "juju_application" "mongodb" {
   units = 1
 }
 
+resource "juju_application" "grafana_agent" {
+  name = "grafana-agent"
+  model = juju_model.sdcore.name
+
+  charm {
+    name = "grafana-agent-k8s"
+    channel  = "latest/stable"
+    series = "jammy"
+  }
+
+  units = 1
+}
+
 
 resource "juju_integration" "amf_nrf" {
   model = juju_model.sdcore.name
@@ -310,6 +323,62 @@ resource "juju_integration" "udr_database" {
   application {
     name     = juju_application.mongodb.name
     endpoint = "database"
+  }
+}
+
+resource "juju_integration" "amf_metrics" {
+  model = juju_model.sdcore.name
+
+  application {
+    name     = juju_application.amf.name
+    endpoint = "metrics-endpoint"
+  }
+
+  application {
+    name     = juju_application.grafana_agent.name
+    endpoint = "metrics-endpoint"
+  }
+}
+
+resource "juju_integration" "smf_metrics" {
+  model = juju_model.sdcore.name
+
+  application {
+    name     = juju_application.smf.name
+    endpoint = "metrics-endpoint"
+  }
+
+  application {
+    name     = juju_application.grafana_agent.name
+    endpoint = "metrics-endpoint"
+  }
+}
+
+resource "juju_integration" "mongodb_metrics" {
+  model = juju_model.sdcore.name
+
+  application {
+    name     = juju_application.mongodb.name
+    endpoint = "metrics-endpoint"
+  }
+
+  application {
+    name     = juju_application.grafana_agent.name
+    endpoint = "metrics-endpoint"
+  }
+}
+
+resource "juju_integration" "mongodb_logging" {
+  model = juju_model.sdcore.name
+
+  application {
+    name     = juju_application.mongodb.name
+    endpoint = "logging"
+  }
+
+  application {
+    name     = juju_application.grafana_agent.name
+    endpoint = "logging-provider"
   }
 }
 
