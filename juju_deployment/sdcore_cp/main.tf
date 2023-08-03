@@ -9,8 +9,8 @@ terraform {
   }
 }
 
-resource "juju_model" "sdcore" {
-  name = "sdcore"
+resource "juju_model" "sdcore_control_plane" {
+  name = "sdcore-control-plane"
   cloud {
     name = var.cloud_name
   }
@@ -19,7 +19,7 @@ resource "juju_model" "sdcore" {
 
 resource "juju_application" "amf" {
   name = "amf"
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
   trust = true
 
   charm {
@@ -33,7 +33,7 @@ resource "juju_application" "amf" {
 
 resource "juju_application" "ausf" {
   name = "ausf"
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
   trust = true
 
   charm {
@@ -47,7 +47,7 @@ resource "juju_application" "ausf" {
 
 resource "juju_application" "nssf" {
   name = "nssf"
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
   trust = true
 
   charm {
@@ -62,7 +62,7 @@ resource "juju_application" "nssf" {
 
 resource "juju_application" "nrf" {
   name = "nrf"
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
   trust = true
 
   charm {
@@ -76,7 +76,7 @@ resource "juju_application" "nrf" {
 
 resource "juju_application" "pcf" {
   name = "pcf"
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
   trust = true
 
   charm {
@@ -90,7 +90,7 @@ resource "juju_application" "pcf" {
 
 resource "juju_application" "smf" {
   name = "smf"
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
   trust = true
 
   charm {
@@ -104,7 +104,7 @@ resource "juju_application" "smf" {
 
 resource "juju_application" "udm" {
   name = "udm"
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
   trust = true
 
   charm {
@@ -118,7 +118,7 @@ resource "juju_application" "udm" {
 
 resource "juju_application" "udr" {
   name = "udr"
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
   trust = true
 
   charm {
@@ -132,7 +132,7 @@ resource "juju_application" "udr" {
 
 resource "juju_application" "mongodb" {
   name = "mongodb"
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
   trust = true
 
   charm {
@@ -146,7 +146,7 @@ resource "juju_application" "mongodb" {
 
 resource "juju_application" "grafana_agent" {
   name = "grafana-agent"
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
 
   charm {
     name = "grafana-agent-k8s"
@@ -159,7 +159,7 @@ resource "juju_application" "grafana_agent" {
 
 resource "juju_application" "webui" {
   name = "webui"
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
   trust = true
 
   charm {
@@ -172,7 +172,7 @@ resource "juju_application" "webui" {
 }
 
 resource "juju_integration" "amf_nrf" {
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
 
   application {
     name     = juju_application.amf.name
@@ -186,7 +186,7 @@ resource "juju_integration" "amf_nrf" {
 }
 
 resource "juju_integration" "ausf_nrf" {
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
 
   application {
     name     = juju_application.ausf.name
@@ -200,7 +200,7 @@ resource "juju_integration" "ausf_nrf" {
 }
 
 resource "juju_integration" "nssf_nrf" {
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
 
   application {
     name     = juju_application.nssf.name
@@ -214,7 +214,7 @@ resource "juju_integration" "nssf_nrf" {
 }
 
 resource "juju_integration" "pcf_nrf" {
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
 
   application {
     name     = juju_application.pcf.name
@@ -228,7 +228,7 @@ resource "juju_integration" "pcf_nrf" {
 }
 
 resource "juju_integration" "smf_nrf" {
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
 
   application {
     name     = juju_application.smf.name
@@ -242,7 +242,7 @@ resource "juju_integration" "smf_nrf" {
 }
 
 resource "juju_integration" "udm_nrf" {
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
 
   application {
     name     = juju_application.udm.name
@@ -256,7 +256,7 @@ resource "juju_integration" "udm_nrf" {
 }
 
 resource "juju_integration" "udr_nrf" {
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
 
   application {
     name     = juju_application.udr.name
@@ -270,7 +270,7 @@ resource "juju_integration" "udr_nrf" {
 }
 
 resource "juju_integration" "amf_database" {
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
 
   application {
     name     = juju_application.amf.name
@@ -284,7 +284,7 @@ resource "juju_integration" "amf_database" {
 }
 
 resource "juju_integration" "nrf_database" {
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
 
   application {
     name     = juju_application.nrf.name
@@ -298,7 +298,7 @@ resource "juju_integration" "nrf_database" {
 }
 
 resource "juju_integration" "pcf_database" {
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
 
   application {
     name     = juju_application.pcf.name
@@ -312,7 +312,7 @@ resource "juju_integration" "pcf_database" {
 }
 
 resource "juju_integration" "smf_database" {
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
 
   application {
     name     = juju_application.smf.name
@@ -326,7 +326,7 @@ resource "juju_integration" "smf_database" {
 }
 
 resource "juju_integration" "udr_database" {
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
 
   application {
     name     = juju_application.udr.name
@@ -340,7 +340,7 @@ resource "juju_integration" "udr_database" {
 }
 
 resource "juju_integration" "webui_database" {
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
 
   application {
     name     = juju_application.webui.name
@@ -354,7 +354,7 @@ resource "juju_integration" "webui_database" {
 }
 
 resource "juju_integration" "amf_metrics" {
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
 
   application {
     name     = juju_application.amf.name
@@ -368,7 +368,7 @@ resource "juju_integration" "amf_metrics" {
 }
 
 resource "juju_integration" "smf_metrics" {
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
 
   application {
     name     = juju_application.smf.name
@@ -382,7 +382,7 @@ resource "juju_integration" "smf_metrics" {
 }
 
 resource "juju_integration" "mongodb_metrics" {
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
 
   application {
     name     = juju_application.mongodb.name
@@ -396,7 +396,7 @@ resource "juju_integration" "mongodb_metrics" {
 }
 
 resource "juju_integration" "mongodb_logging" {
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
 
   application {
     name     = juju_application.mongodb.name
@@ -410,7 +410,7 @@ resource "juju_integration" "mongodb_logging" {
 }
 
 resource "juju_integration" "metrics" {
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
 
   application {
     name     = juju_application.grafana_agent.name
@@ -423,7 +423,7 @@ resource "juju_integration" "metrics" {
 }
 
 resource "juju_integration" "logging" {
-  model = juju_model.sdcore.name
+  model = juju_model.sdcore_control_plane.name
 
   application {
     name     = juju_application.grafana_agent.name
