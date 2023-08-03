@@ -201,6 +201,33 @@ resource "juju_integration" "nrf_database" {
   }
 }
 
+resource "juju_integration" "smf_database" {
+  model = juju_model.sdcore.name
+
+  application {
+    name     = juju_application.smf.name
+    endpoint = "database"
+  }
+
+  application {
+    name     = juju_application.mongodb.name
+    endpoint = "database"
+  }
+}
+
+resource "juju_integration" "udr_database" {
+  model = juju_model.sdcore.name
+
+  application {
+    name     = juju_application.udr.name
+    endpoint = "database"
+  }
+
+  application {
+    name     = juju_application.mongodb.name
+    endpoint = "database"
+  }
+}
 
 #
 # resource "juju_application" "upf" {
