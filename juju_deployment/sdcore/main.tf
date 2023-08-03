@@ -25,6 +25,7 @@ resource "juju_application" "amf" {
   charm {
     name = "sdcore-amf"
     channel  = "edge"
+    series = "jammy"
   }
 
   units = 1
@@ -38,6 +39,7 @@ resource "juju_application" "ausf" {
   charm {
     name = "sdcore-ausf"
     channel  = "edge"
+    series = "jammy"
   }
 
   units = 1
@@ -51,6 +53,7 @@ resource "juju_application" "nssf" {
   charm {
     name = "sdcore-nssf"
     channel  = "edge"
+    series = "jammy"
   }
 
   units = 1
@@ -65,6 +68,7 @@ resource "juju_application" "nrf" {
   charm {
     name = "sdcore-nrf"
     channel  = "edge"
+    series = "jammy"
   }
 
   units = 1
@@ -78,6 +82,7 @@ resource "juju_application" "pcf" {
   charm {
     name = "sdcore-pcf"
     channel  = "edge"
+    series = "jammy"
   }
 
   units = 1
@@ -91,6 +96,7 @@ resource "juju_application" "smf" {
   charm {
     name = "sdcore-smf"
     channel  = "edge"
+    series = "jammy"
   }
 
   units = 1
@@ -104,6 +110,7 @@ resource "juju_application" "udm" {
   charm {
     name = "sdcore-udm"
     channel  = "edge"
+    series = "jammy"
   }
 
   units = 1
@@ -117,6 +124,7 @@ resource "juju_application" "udr" {
   charm {
     name = "sdcore-udr"
     channel  = "edge"
+    series = "jammy"
   }
 
   units = 1
@@ -130,6 +138,7 @@ resource "juju_application" "upf" {
   charm {
     name = "sdcore-upf"
     channel  = "edge"
+    series = "jammy"
   }
 
   units = 1
