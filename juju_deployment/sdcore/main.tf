@@ -187,11 +187,53 @@ resource "juju_integration" "nssf_nrf" {
   }
 }
 
+resource "juju_integration" "pcf_nrf" {
+  model = juju_model.sdcore.name
+
+  application {
+    name     = juju_application.pcf.name
+    endpoint = "fiveg_nrf"
+  }
+
+  application {
+    name     = juju_application.nrf.name
+    endpoint = "fiveg-nrf"
+  }
+}
+
+resource "juju_integration" "smf_nrf" {
+  model = juju_model.sdcore.name
+
+  application {
+    name     = juju_application.smf.name
+    endpoint = "fiveg_nrf"
+  }
+
+  application {
+    name     = juju_application.nrf.name
+    endpoint = "fiveg-nrf"
+  }
+}
+
 resource "juju_integration" "udm_nrf" {
   model = juju_model.sdcore.name
 
   application {
     name     = juju_application.udm.name
+    endpoint = "fiveg_nrf"
+  }
+
+  application {
+    name     = juju_application.nrf.name
+    endpoint = "fiveg-nrf"
+  }
+}
+
+resource "juju_integration" "udr_nrf" {
+  model = juju_model.sdcore.name
+
+  application {
+    name     = juju_application.udr.name
     endpoint = "fiveg_nrf"
   }
 
