@@ -339,6 +339,20 @@ resource "juju_integration" "udr_database" {
   }
 }
 
+resource "juju_integration" "webui_database" {
+  model = juju_model.sdcore.name
+
+  application {
+    name     = juju_application.webui.name
+    endpoint = "database"
+  }
+
+  application {
+    name     = juju_application.mongodb.name
+    endpoint = "database"
+  }
+}
+
 resource "juju_integration" "amf_metrics" {
   model = juju_model.sdcore.name
 
@@ -392,5 +406,18 @@ resource "juju_integration" "mongodb_logging" {
   application {
     name     = juju_application.grafana_agent.name
     endpoint = "logging-provider"
+  }
+}
+
+resource "juju_integration" "metrics" {
+  model = juju_model.sdcore.name
+
+  application {
+    name     = juju_application.grafana_agent.name
+    endpoint = "send-remote-write"
+  }
+
+  application {
+    offer_url = var.metrics_remote_write_offer_url
   }
 }
