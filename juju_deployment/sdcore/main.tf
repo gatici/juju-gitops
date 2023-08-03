@@ -157,6 +157,19 @@ resource "juju_application" "grafana_agent" {
   units = 1
 }
 
+resource "juju_application" "webui" {
+  name = "webui"
+  model = juju_model.sdcore.name
+  trust = true
+
+  charm {
+    name = "sdcore-webui"
+    channel  = "edge"
+    series = "jammy"
+  }
+
+  units = 1
+}
 
 resource "juju_integration" "amf_nrf" {
   model = juju_model.sdcore.name
