@@ -130,7 +130,7 @@ resource "juju_application" "udr" {
   units = 1
 }
 
-resource "juju_application" "mongo" {
+resource "juju_application" "mongodb" {
   name = "mongodb"
   model = juju_model.sdcore.name
   trust = true
@@ -178,6 +178,20 @@ resource "juju_integration" "amf_database" {
 
   application {
     name     = juju_application.amf.name
+    endpoint = "database"
+  }
+
+  application {
+    name     = juju_application.mongodb.name
+    endpoint = "database"
+  }
+}
+
+resource "juju_integration" "nrf_database" {
+  model = juju_model.sdcore.name
+
+  application {
+    name     = juju_application.nrf.name
     endpoint = "database"
   }
 
