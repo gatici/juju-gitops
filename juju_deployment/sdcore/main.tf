@@ -421,3 +421,16 @@ resource "juju_integration" "metrics" {
     offer_url = var.metrics_remote_write_offer_url
   }
 }
+
+resource "juju_integration" "logging" {
+  model = juju_model.sdcore.name
+
+  application {
+    name     = juju_application.grafana_agent.name
+    endpoint = "logging-consumer"
+  }
+
+  application {
+    offer_url = var.logging_offer_url
+  }
+}
