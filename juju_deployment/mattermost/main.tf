@@ -38,6 +38,7 @@ resource "juju_application" "postgresql" {
   charm {
     name = "postgresql-k8s"
     channel  = "14/stable"
+    series = "jammy"
   }
 
   units = 1
