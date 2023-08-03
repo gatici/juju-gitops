@@ -51,6 +51,7 @@ resource "juju_application" "tls_certificates_operator" {
   charm {
     name = "tls-certificates-operator"
     channel  = "latest/stable"
+    series = "jammy"
   }
 
   config = {
