@@ -51,6 +51,7 @@ resource "juju_application" "self_signed_certs" {
   charm {
     name = "self-signed-certificates"
     channel  = "beta"
+    series = "jammy"
   }
 
   units = 1
