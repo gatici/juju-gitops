@@ -126,6 +126,20 @@ resource "juju_integration" "prometheus_ingress" {
   }
 }
 
+resource "juju_integration" "loki_ingress" {
+  model = juju_model.cos.name
+
+  application {
+    name     = juju_application.traefik.name
+    endpoint = "ingress-per-unit"
+  }
+
+  application {
+    name     = juju_application.loki.name
+    endpoint = "ingress"
+  }
+}
+
 resource "juju_integration" "grafana_ingress" {
   model = juju_model.cos.name
 
