@@ -70,6 +70,39 @@ resource "juju_application" "traefik" {
   units = 1
 }
 
+resource "juju_application" "cos_configuration" {
+  name = "cos_configuration"
+  model = juju_model.cos.name
+
+  charm {
+    name = "cos-configuration-k8s"
+    channel  = "latest/stable"
+  }
+
+  config = {
+    git_repo = "https://github.com/canonical/sdcore-cos-configuration"
+    git_branch = "main"
+    git_depth = 1
+    grafana_dashboards_path = "grafana_dashboards/sdcore/"
+  }
+
+  units = 1
+}
+
+resource "juju_integration" "cos_configuration" {
+  model = juju_model.cos.name
+
+  application {
+    name     = juju_application.grafana.name
+    endpoint = "grafana-dashboard"
+  }
+
+  application {
+    name     = juju_application.cos_configuration.name
+    endpoint = "grafana-dashboards"
+  }
+}
+
 resource "juju_integration" "grafana_source" {
   model = juju_model.cos.name
 
