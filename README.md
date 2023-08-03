@@ -5,11 +5,11 @@ using Terraform and Juju.
 
 ## Content
 
-This project maintains a Mattermost deployment running on AWS.
+This project maintains a SD-Core deployment running on AWS.
 
 ![img.png](img.png)
 
 ## TODO
 
-1. Add cross model relationship between COS and Mattermost. Right now the released version of postgresql-k8s does not support the metrics integration.
-2. Add ingress relation between Mattermost and Traefik. Right now Mattermost does not support this relation.
+1. Add K8s cluster with Multus
+2. Add UPF to this k8s cluster
