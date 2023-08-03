@@ -144,6 +144,21 @@ resource "juju_application" "mongo" {
   units = 1
 }
 
+
+resource "juju_integration" "ausf_nrf" {
+  model = juju_model.sdcore.name
+
+  application {
+    name     = juju_application.ausf.name
+    endpoint = "fiveg_nrf"
+  }
+
+  application {
+    name     = juju_application.nrf.name
+    endpoint = "fiveg_nrf"
+  }
+}
+
 resource "juju_integration" "amf_nrf" {
   model = juju_model.sdcore.name
 
