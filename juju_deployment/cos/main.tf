@@ -71,7 +71,7 @@ resource "juju_application" "traefik" {
 }
 
 resource "juju_application" "cos_configuration" {
-  name = "cos_configuration"
+  name = "cos-configuration"
   model = juju_model.cos.name
 
   charm {
