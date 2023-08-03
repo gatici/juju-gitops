@@ -145,6 +145,20 @@ resource "juju_application" "mongodb" {
 }
 
 
+resource "juju_integration" "amf_nrf" {
+  model = juju_model.sdcore.name
+
+  application {
+    name     = juju_application.amf.name
+    endpoint = "fiveg_nrf"
+  }
+
+  application {
+    name     = juju_application.nrf.name
+    endpoint = "fiveg-nrf"
+  }
+}
+
 resource "juju_integration" "ausf_nrf" {
   model = juju_model.sdcore.name
 
@@ -159,11 +173,11 @@ resource "juju_integration" "ausf_nrf" {
   }
 }
 
-resource "juju_integration" "amf_nrf" {
+resource "juju_integration" "nssf_nrf" {
   model = juju_model.sdcore.name
 
   application {
-    name     = juju_application.amf.name
+    name     = juju_application.nssf.name
     endpoint = "fiveg_nrf"
   }
 
@@ -192,6 +206,20 @@ resource "juju_integration" "nrf_database" {
 
   application {
     name     = juju_application.nrf.name
+    endpoint = "database"
+  }
+
+  application {
+    name     = juju_application.mongodb.name
+    endpoint = "database"
+  }
+}
+
+resource "juju_integration" "pcf_database" {
+  model = juju_model.sdcore.name
+
+  application {
+    name     = juju_application.pcf.name
     endpoint = "database"
   }
 
