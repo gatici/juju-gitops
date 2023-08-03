@@ -130,16 +130,60 @@ resource "juju_application" "udr" {
   units = 1
 }
 
-resource "juju_application" "upf" {
-  name = "upf"
+resource "juju_application" "mongo" {
+  name = "mongodb"
   model = juju_model.sdcore.name
   trust = true
 
   charm {
-    name = "sdcore-upf"
-    channel  = "edge"
+    name = "mongodb-k8s"
+    channel  = "5/edge"
     series = "jammy"
   }
 
   units = 1
 }
+
+resource "juju_integration" "amf_nrf" {
+  model = juju_model.sdcore.name
+
+  application {
+    name     = juju_application.amf.name
+    endpoint = "fiveg_nrf"
+  }
+
+  application {
+    name     = juju_application.nrf.name
+    endpoint = "fiveg_nrf"
+  }
+}
+
+resource "juju_integration" "amf_database" {
+  model = juju_model.sdcore.name
+
+  application {
+    name     = juju_application.amf.name
+    endpoint = "database"
+  }
+
+  application {
+    name     = juju_application.mongodb.name
+    endpoint = "database"
+  }
+}
+
+
+#
+# resource "juju_application" "upf" {
+#   name = "upf"
+#   model = juju_model.sdcore.name
+#   trust = true
+#
+#   charm {
+#     name = "sdcore-upf"
+#     channel  = "edge"
+#     series = "jammy"
+#   }
+#
+#   units = 1
+# }
