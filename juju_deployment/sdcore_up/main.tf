@@ -1,9 +1,9 @@
 terraform {
-  required_version = ">= 1.4"
+  required_version = ">= 1.3"
   required_providers {
     juju = {
       source  = "juju/juju"
-      version = "0.8.0"
+      version = "~> 0.10.0"
     }
   }
 }
@@ -23,8 +23,7 @@ resource "juju_application" "upf" {
 
   charm {
     name = "sdcore-upf"
-    channel  = "edge"
-    series = "jammy"
+    channel  = "beta"
   }
 
   units = 1
@@ -37,7 +36,6 @@ resource "juju_application" "grafana_agent" {
   charm {
     name = "grafana-agent-k8s"
     channel  = "latest/stable"
-    series = "jammy"
   }
 
   units = 1

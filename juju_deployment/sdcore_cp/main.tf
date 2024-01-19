@@ -1,10 +1,10 @@
 
 terraform {
-  required_version = ">= 1.4"
+  required_version = ">= 1.3"
   required_providers {
     juju = {
       source  = "juju/juju"
-      version = "0.8.0"
+      version = "~> 0.10.0"
     }
   }
 }
@@ -24,8 +24,7 @@ resource "juju_application" "amf" {
 
   charm {
     name = "sdcore-amf"
-    channel  = "edge"
-    series = "jammy"
+    channel  = "beta"
   }
 
   units = 1
@@ -38,8 +37,7 @@ resource "juju_application" "ausf" {
 
   charm {
     name = "sdcore-ausf"
-    channel  = "edge"
-    series = "jammy"
+    channel  = "beta"
   }
 
   units = 1
@@ -52,8 +50,7 @@ resource "juju_application" "nssf" {
 
   charm {
     name = "sdcore-nssf"
-    channel  = "edge"
-    series = "jammy"
+    channel  = "beta"
   }
 
   units = 1
@@ -67,8 +64,7 @@ resource "juju_application" "nrf" {
 
   charm {
     name = "sdcore-nrf"
-    channel  = "edge"
-    series = "jammy"
+    channel  = "beta"
   }
 
   units = 1
@@ -81,8 +77,7 @@ resource "juju_application" "pcf" {
 
   charm {
     name = "sdcore-pcf"
-    channel  = "edge"
-    series = "jammy"
+    channel  = "beta"
   }
 
   units = 1
@@ -95,8 +90,7 @@ resource "juju_application" "smf" {
 
   charm {
     name = "sdcore-smf"
-    channel  = "edge"
-    series = "jammy"
+    channel  = "beta"
   }
 
   units = 1
@@ -109,8 +103,7 @@ resource "juju_application" "udm" {
 
   charm {
     name = "sdcore-udm"
-    channel  = "edge"
-    series = "jammy"
+    channel  = "beta"
   }
 
   units = 1
@@ -123,8 +116,7 @@ resource "juju_application" "udr" {
 
   charm {
     name = "sdcore-udr"
-    channel  = "edge"
-    series = "jammy"
+    channel  = "beta"
   }
 
   units = 1
@@ -137,8 +129,7 @@ resource "juju_application" "mongodb" {
 
   charm {
     name = "mongodb-k8s"
-    channel  = "5/edge"
-    series = "jammy"
+    channel  = "6/beta"
   }
 
   units = 1
@@ -151,7 +142,6 @@ resource "juju_application" "grafana_agent" {
   charm {
     name = "grafana-agent-k8s"
     channel  = "latest/stable"
-    series = "jammy"
   }
 
   units = 1
@@ -164,8 +154,7 @@ resource "juju_application" "webui" {
 
   charm {
     name = "sdcore-webui"
-    channel  = "edge"
-    series = "jammy"
+    channel  = "beta"
   }
 
   units = 1

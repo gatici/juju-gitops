@@ -2,9 +2,9 @@
 terraform {
 
   backend "s3" {
-    bucket = "tfdemo-infra"
-    region = "us-east-2"
-    key    = "terraform.tfstate"
+    bucket = "jujuterraform"
+    region = "us-east-1"
+    key    = "aws/s3"
   }
 
   required_providers {
